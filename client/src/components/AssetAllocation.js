@@ -20,9 +20,9 @@ const AssetAllocation = (props) => {
       {
         data: [33, 33, 33],
         backgroundColor: [
-          colors.indigo[500],
-          colors.red[600],
-          colors.orange[600]
+          '#d7e6a3',
+          '#d3a15f',
+          '#54929e'
         ],
         hoverOffset: 4
       }
