@@ -13,7 +13,7 @@ const theme = createMuiTheme({
 });
 
 const Navbar = () => (
-  <AppBar>
+  <AppBar style={{ background: '#424242' }}>
     <Toolbar>
       <ThemeProvider theme={theme}>
         <Typography>
