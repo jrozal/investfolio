@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardHeader,
-  Chip,
   Divider,
   Table,
   TableBody,
@@ -12,8 +11,7 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-  Tooltip,
-  makeStyles
+  Tooltip
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
