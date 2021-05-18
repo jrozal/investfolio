@@ -37,7 +37,7 @@ const Bitcoin = (props) => (
             variant="h4"
             style={{ paddingTop: 10, paddingBottom: 10 }}
           >
-              $44,907.31
+              <>{ props.btc === undefined ? '' : '$' + props.btc.today }</>
           </Typography>
         </Grid>
         <Grid item>
@@ -67,7 +67,7 @@ const Bitcoin = (props) => (
             fontWeight: 500
           }}
         >
-          -6.30%
+          <>{ props.btc === undefined ? '' : props.btc.change }</>
         </Typography>
         <Typography
           color="textSecondary"

@@ -37,7 +37,7 @@ const Nasdaq = (props) => (
             variant="h4"
             style={{ paddingTop: 10, paddingBottom: 10 }}
           >
-              13,429.98
+              <>{ props.ndx === undefined ? '' : props.ndx.today }</>
           </Typography>
         </Grid>
         <Grid item>
@@ -67,7 +67,7 @@ const Nasdaq = (props) => (
             fontWeight: 500
           }}
         >
-          +2.32%
+          <>{ props.ndx === undefined ? '' : props.ndx.change }</>
         </Typography>
         <Typography
           color="textSecondary"

@@ -1,5 +1,5 @@
-import React from 'react';
-import Navbar from './Navbar'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Box,
   Container,
@@ -8,6 +8,7 @@ import {
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { styled } from '@material-ui/core/styles';
+import Navbar from './Navbar';
 import AssetAllocation from './AssetAllocation';
 import Investments from './Investments';
 import SP500 from './SmallCards/SP500';
@@ -19,7 +20,7 @@ const background = createMuiTheme({
   palette: {
     background: {
       // default: "#f4f6f8", //old bg color
-      default: "#FEFBEF",
+      default: "#f2f2f2",
       height: '100%',
       width: '100%'
     }
@@ -53,82 +54,102 @@ const AppContent = styled('div')({
   height: '100%',
 });
 
-const App = () => (
-  <MuiThemeProvider theme={background}>
-    <CssBaseline />
-    <AppRoot>
-      <Navbar />
-      <AppWrapper>
-        <AppContainer>
-          <AppContent>
-            <Box>
-              <Container maxWidth={false}>
-                <Grid
-                  container
-                  spacing={3}
-                >
+const App = () => {
+  const [indexData, setIndexData] = useState({});
+
+  const getIndexData = () => {
+    axios.get('/getIndexData')
+      .then(res => {
+        console.log(res.data)
+        setIndexData(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
+  useEffect(() => {
+    console.log('calling getIndexData()')
+    getIndexData();
+  },[]);
+
+  return (
+    <MuiThemeProvider theme={background}>
+      <CssBaseline />
+      <AppRoot>
+        <Navbar />
+        <AppWrapper>
+          <AppContainer>
+            <AppContent>
+              <Box>
+                <Container maxWidth={false}>
                   <Grid
-                    item
-                    lg={3}
-                    sm={6}
-                    xl={3}
-                    xs={12}
+                    container
+                    spacing={3}
                   >
-                    <SP500 />
+                    <Grid
+                      item
+                      lg={3}
+                      sm={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <SP500 spx={indexData['SPX']}/>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={3}
+                      sm={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <Nasdaq ndx={indexData['NDX']}/>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={3}
+                      sm={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <Russell2000 rut={indexData['RUT']}/>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={3}
+                      sm={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <Bitcoin btc={indexData['BTC/USD']}/>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={4}
+                      md={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <AssetAllocation sx={{ height: '100%' }} />
+                    </Grid>
+                    <Grid
+                      item
+                      lg={8}
+                      md={12}
+                      xl={9}
+                      xs={12}
+                    >
+                      <Investments />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    lg={3}
-                    sm={6}
-                    xl={3}
-                    xs={12}
-                  >
-                    <Nasdaq />
-                  </Grid>
-                  <Grid
-                    item
-                    lg={3}
-                    sm={6}
-                    xl={3}
-                    xs={12}
-                  >
-                    <Russell2000 />
-                  </Grid>
-                  <Grid
-                    item
-                    lg={3}
-                    sm={6}
-                    xl={3}
-                    xs={12}
-                  >
-                    <Bitcoin sx={{ height: '100%' }} />
-                  </Grid>
-                  <Grid
-                    item
-                    lg={4}
-                    md={6}
-                    xl={3}
-                    xs={12}
-                  >
-                    <AssetAllocation sx={{ height: '100%' }} />
-                  </Grid>
-                  <Grid
-                    item
-                    lg={8}
-                    md={12}
-                    xl={9}
-                    xs={12}
-                  >
-                    <Investments />
-                  </Grid>
-                </Grid>
-              </Container>
-            </Box>
-          </AppContent>
-        </AppContainer>
-      </AppWrapper>
-    </AppRoot>
-  </MuiThemeProvider>
-);
+                </Container>
+              </Box>
+            </AppContent>
+          </AppContainer>
+        </AppWrapper>
+      </AppRoot>
+    </MuiThemeProvider>
+  )
+};
 
 export default App;

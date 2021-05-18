@@ -37,7 +37,7 @@ const Russell2000 = (props) => (
             variant="h4"
             style={{ paddingTop: 10, paddingBottom: 10 }}
           >
-              2,224.63
+              <>{ props.rut === undefined ? '' : props.rut.today }</>
           </Typography>
         </Grid>
         <Grid item>
@@ -67,7 +67,7 @@ const Russell2000 = (props) => (
             fontWeight: 500
           }}
         >
-          +2.47%
+          <>{ props.rut === undefined ? '' : props.rut.change }</>
         </Typography>
         <Typography
           color="textSecondary"

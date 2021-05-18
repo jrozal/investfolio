@@ -37,7 +37,7 @@ const SP500 = (props) => (
             variant="h4"
             style={{ paddingTop: 10, paddingBottom: 10 }}
           >
-              4,173.85
+            <>{ props.spx === undefined ? '' : props.spx.today }</>
           </Typography>
         </Grid>
         <Grid item>
@@ -67,7 +67,7 @@ const SP500 = (props) => (
             fontWeight: 500
           }}
         >
-          +1.49%
+          <>{ props.spx === undefined ? '' : props.spx.change }</>
         </Typography>
         <Typography
           color="textSecondary"
