@@ -22,17 +22,34 @@ const Bitcoin = (props) => (
         <Grid item>
           <Typography
             color="textSecondary"
-            gutterBottom
             variant="h6"
           >
             Bitcoin
           </Typography>
           <Typography
+            color="textSecondary"
+            variant="h7"
+          >
+            BTC / U.S. Dollar
+          </Typography>
+          <Typography
             color="textPrimary"
             variant="h4"
+            style={{ paddingTop: 10, paddingBottom: 10 }}
           >
               $44,907.31
           </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            style={{
+              backgroundColor: red[600],
+              height: 56,
+              width: 56
+            }}
+          >
+            <TrendingDownIcon style={{ fontSize: '2.25rem'  }} />
+          </Avatar>
         </Grid>
       </Grid>
       <Box
@@ -40,16 +57,15 @@ const Bitcoin = (props) => (
           alignItems: 'center',
           display: 'flex',
         }}
-        pt={1}
       >
-        <TrendingDownIcon style={{ color: red[900], paddingRight: 5 }}/>
         <Typography
           variant="body2"
           style={{
             color: red[900],
-            paddingRight: 10
+            paddingRight: 10,
+            fontSize: '1rem',
+            fontWeight: 500
           }}
-          fontWeight={500}
         >
           -6.30%
         </Typography>

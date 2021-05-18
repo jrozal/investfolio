@@ -22,17 +22,34 @@ const Russell2000 = (props) => (
         <Grid item>
           <Typography
             color="textSecondary"
-            gutterBottom
             variant="h6"
           >
             Russell 2000
           </Typography>
           <Typography
+            color="textSecondary"
+            variant="h7"
+          >
+            RUT
+          </Typography>
+          <Typography
             color="textPrimary"
             variant="h4"
+            style={{ paddingTop: 10, paddingBottom: 10 }}
           >
               2,224.63
           </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            style={{
+              backgroundColor: green[600],
+              height: 56,
+              width: 56
+            }}
+          >
+            <TrendingUpIcon style={{ fontSize: '2.25rem' }} />
+          </Avatar>
         </Grid>
       </Grid>
       <Box
@@ -40,17 +57,17 @@ const Russell2000 = (props) => (
           alignItems: 'center',
           display: 'flex',
         }}
-        pt={1}
       >
-        <TrendingUpIcon style={{ color: green[900], paddingRight: 5 }}/>
         <Typography
           variant="body2"
           style={{
             color: green[900],
-            paddingRight: 10
+            paddingRight: 10,
+            fontSize: '1rem',
+            fontWeight: 500
           }}
         >
-          2.47%
+          +2.47%
         </Typography>
         <Typography
           color="textSecondary"
