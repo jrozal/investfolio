@@ -28,7 +28,7 @@ const Bitcoin = (props) => (
           </Typography>
           <Typography
             color="textSecondary"
-            variant="h7"
+            style={{ fontSize: '0.9rem' }}
           >
             BTC / U.S. Dollar
           </Typography>
