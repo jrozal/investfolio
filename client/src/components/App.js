@@ -11,6 +11,7 @@ import { styled } from '@material-ui/core/styles';
 import Navbar from './Navbar';
 import AssetAllocation from './AssetAllocation';
 import Investments from './Investments';
+import PercentReturn from './PercentReturn';
 import SP500 from './SmallCards/SP500';
 import Nasdaq from './SmallCards/Nasdaq';
 import Russell2000 from './SmallCards/Russell2000';
@@ -125,16 +126,25 @@ const App = () => {
                     </Grid>
                     <Grid
                       item
-                      lg={4}
+                      lg={6}
                       md={6}
                       xl={3}
                       xs={12}
                     >
-                      <AssetAllocation sx={{ height: '100%' }} />
+                      <AssetAllocation style={{ height: '100%' }} />
                     </Grid>
                     <Grid
                       item
-                      lg={8}
+                      lg={6}
+                      md={6}
+                      xl={3}
+                      xs={12}
+                    >
+                      <PercentReturn />
+                    </Grid>
+                    <Grid
+                      item
+                      lg={12}
                       md={12}
                       xl={9}
                       xs={12}

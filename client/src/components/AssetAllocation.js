@@ -15,14 +15,18 @@ const AssetAllocation = (props) => {
   const theme = useTheme();
 
   const dummyData = {
-    labels: ['AAPL', 'GOOGL', 'FB'],
+    labels: ['ARKK', 'BTC', 'DIS', 'ETH', 'FB', 'VGT', 'VTI'],
     datasets: [
       {
-        data: [33, 33, 33],
+        data: [1.2, 3.7, 7, 3.65, 4.9, 10.85, 53.96],
         backgroundColor: [
-          '#d7e6a3',
-          '#d3a15f',
-          '#54929e'
+          '#E7F09F',
+          '#5760A0',
+          '#8B94C0',
+          '#07B088',
+          '#12123D',
+          '#bff9e4',
+          '#8CDABF'
         ],
         hoverOffset: 4
       }
@@ -30,7 +34,7 @@ const AssetAllocation = (props) => {
   };
 
   const options = {
-    animation: false,
+    animation: true,
     layout: { padding: 0 },
     legend: {
       display: false
@@ -47,7 +51,7 @@ const AssetAllocation = (props) => {
         <Box>
           <Pie
             data={dummyData}
-            height={300}
+            height={400}
             options={options}
           />
         </Box>
