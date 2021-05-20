@@ -1,4 +1,4 @@
-require('dotenv').config();
+const dotenv = require('dotenv').config();
 
 const config = {
   db: {
@@ -8,8 +8,8 @@ const config = {
     database: 'investfolio',
     dialect: 'mysql'
   },
-  finnhubAPI: process.env.FINNHUB_API_KEY,
-  twelvedataAPI: process.env.TWELVEDATA_API
+  finnhubApiKey: process.env.FINNHUB_API_KEY,
+  twelvedataApiKey: process.env.TWELVEDATA_API
 };
 
 module.exports = config;
