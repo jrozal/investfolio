@@ -3,6 +3,9 @@ const app = express();
 const port = 3000;
 const router = require('./routes');
 
+// establish database connection
+const db = require('../database');
+
 // server routes
 app.use('/', router);
 
