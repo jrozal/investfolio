@@ -56,22 +56,44 @@ const AppContent = styled('div')({
 });
 
 const App = () => {
-  const [indexData, setIndexData] = useState({});
+  const [data, setData] = useState({
+    indexData: {},
+    portfolioData: {}
+  });
 
   const getIndexData = () => {
     axios.get('/getIndexData')
       .then(res => {
-        console.log(res.data)
-        setIndexData(res.data)
+        setData((prevState) => {
+          return({
+            ...prevState,
+            indexData: res.data
+          })
+        })
       })
       .catch(err => {
         console.log(err)
       })
   };
 
+  const getPortfolioData = () => {
+    axios.get('/getPortfolioData')
+      .then(res => {
+        setData((prevState) => {
+          return ({
+            ...prevState,
+            portfolioData: res.data
+          });
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   useEffect(() => {
     console.log('calling getIndexData()')
     getIndexData();
+    console.log('calling getPortfolioData()')
+    getPortfolioData();
   },[]);
 
   return (
@@ -95,7 +117,7 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <SP500 spx={indexData['SPX']}/>
+                      <SP500 spx={data.indexData['SPX']}/>
                     </Grid>
                     <Grid
                       item
@@ -104,7 +126,7 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <Nasdaq ndx={indexData['NDX']}/>
+                      <Nasdaq ndx={data.indexData['NDX']}/>
                     </Grid>
                     <Grid
                       item
@@ -113,7 +135,7 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <Russell2000 rut={indexData['RUT']}/>
+                      <Russell2000 rut={data.indexData['RUT']}/>
                     </Grid>
                     <Grid
                       item
@@ -122,7 +144,7 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <Bitcoin btc={indexData['BTC/USD']}/>
+                      <Bitcoin btc={data.indexData['BTC/USD']}/>
                     </Grid>
                     <Grid
                       item
@@ -131,7 +153,9 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <AssetAllocation style={{ height: '100%' }} />
+                      <AssetAllocation
+                        portfolioAllocation={data.portfolioData.portfolioAllocation}
+                        style={{ height: '100%' }} />
                     </Grid>
                     <Grid
                       item
@@ -140,7 +164,7 @@ const App = () => {
                       xl={3}
                       xs={12}
                     >
-                      <PercentReturn />
+                      <PercentReturn dailyPercentReturn={data.portfolioData.data}/>
                     </Grid>
                     <Grid
                       item
@@ -149,7 +173,7 @@ const App = () => {
                       xl={9}
                       xs={12}
                     >
-                      <Investments />
+                      <Investments portfolioData={data.portfolioData.data}/>
                     </Grid>
                   </Grid>
                 </Container>

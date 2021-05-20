@@ -7,31 +7,39 @@ import {
   CardHeader,
   Divider,
   Typography,
-  colors,
-  useTheme
+  colors
 } from '@material-ui/core';
 
-const AssetAllocation = (props) => {
-  const theme = useTheme();
+const AssetAllocation = ({ portfolioAllocation }) => {
+  let data;
+  if (portfolioAllocation) {
+    const labels = portfolioAllocation.map(data => data.symbol);
+    const dataSet = portfolioAllocation.map(data => (data.portfolioAllocation * 100).toFixed(2));
 
-  const dummyData = {
-    labels: ['ARKK', 'BTC', 'DIS', 'ETH', 'FB', 'VGT', 'VTI'],
-    datasets: [
-      {
-        data: [1.2, 3.7, 7, 3.65, 4.9, 10.85, 53.96],
-        backgroundColor: [
-          '#E7F09F',
-          '#5760A0',
-          '#8B94C0',
-          '#07B088',
-          '#12123D',
-          '#bff9e4',
-          '#8CDABF'
-        ],
-        hoverOffset: 4
-      }
-    ]
-  };
+    data = {
+      labels: labels,
+      datasets: [
+        {
+          data: dataSet,
+          backgroundColor: [
+            '#E7F09F',
+            '#5760A0',
+            '#8B94C0',
+            '#07B088',
+            '#12123D',
+            '#bff9e4',
+            '#8CDABF',
+            '#B5A2CF',
+            '#1EBC82',
+            '#06734F',
+            '#A5E7E7',
+            '#A9E6E6'
+          ],
+          hoverOffset: 4
+        }
+      ]
+    };
+  }
 
   const options = {
     animation: true,
@@ -44,13 +52,13 @@ const AssetAllocation = (props) => {
   }
 
   return (
-    <Card {...props}>
+    <Card>
       <CardHeader title="Asset Allocation" />
       <Divider />
       <CardContent>
         <Box>
           <Pie
-            data={dummyData}
+            data={data}
             height={400}
             options={options}
           />

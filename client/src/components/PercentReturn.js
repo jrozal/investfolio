@@ -11,19 +11,24 @@ import {
 } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
 
-const PercentReturn = (props) => {
-  const data = [-15, 110.5, 42, 103, 70, 18, 37];
-  const colors = data.map((value) => value < 0 ? red[300] : green[300]);
+const PercentReturn = ({ dailyPercentReturn }) => {
+  let data;
+  if (dailyPercentReturn) {
+    const labels = dailyPercentReturn.map(data => data.symbol);
+    const dataSet = dailyPercentReturn.map(data => data.percentChange);
+    const colors = dataSet.map((value) => value < 0 ? red[300] : green[300]);
 
-  const mockData = {
-    datasets: [
-      {
-        backgroundColor: colors,
-        data: data,
-      },
-    ],
-    labels: ['ARKK', 'BTC', 'DIS', 'ETH', 'FB', 'VGT', 'VTI']
-  };
+    data = {
+      datasets: [
+        {
+          backgroundColor: colors,
+          data: dataSet,
+        },
+      ],
+      labels: labels
+    };
+  }
+
 
   const options = {
     indexAxis: 'y',
@@ -34,13 +39,13 @@ const PercentReturn = (props) => {
   };
 
   return (
-    <Card {...props}>
-      <CardHeader title="Percentage Returns"/>
+    <Card>
+      <CardHeader title="Daily Percentage Returns"/>
       <Divider />
       <CardContent>
         <Box>
           <Bar
-            data={mockData}
+            data={data}
             height={400}
             options={options}
           />
