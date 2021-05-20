@@ -10,7 +10,13 @@ const getMarketIndexData = (req, res) => {
 
 const getPortfolioData = (req, res) => {
   const apiResponse = models.portfolio
-    .findAll({ attributes: ['symbol'], raw: true })
+    .findAll({
+      order: [
+        ['symbol', 'ASC']
+      ],
+      attributes: ['symbol'],
+      raw: true
+    })
     .then(data => {
       let symbols = [];
       data.forEach((record) => {
@@ -24,7 +30,12 @@ const getPortfolioData = (req, res) => {
     .catch(err => err);
 
   const queryResponse = models.portfolio
-    .findAll({ raw: true })
+    .findAll({
+      order: [
+        ['symbol', 'ASC']
+      ],
+      raw: true
+    })
     .then(data => data)
     .catch(err => err)
 
