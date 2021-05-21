@@ -17,13 +17,17 @@ import Nasdaq from './SmallCards/Nasdaq';
 import Russell2000 from './SmallCards/Russell2000';
 import Bitcoin from './SmallCards/Bitcoin';
 
-const background = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     background: {
-      // default: "#f4f6f8", //old bg color
       default: "#f2f2f2",
       height: '100%',
       width: '100%'
+    }
+  },
+  typography: {
+    h5: {
+      fontSize: '1.25rem'
     }
   }
 });
@@ -32,7 +36,8 @@ const AppRoot = styled('div')({
   display: 'flex',
   height: '100%',
   overflow: 'hidden',
-  width: '100%'
+  width: '90%',
+  margin: 'auto'
 });
 
 const AppWrapper = styled('div')({
@@ -71,9 +76,7 @@ const App = () => {
           })
         })
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => console.log(err))
   };
 
   const getPortfolioData = () => {
@@ -90,17 +93,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('calling getIndexData()')
     getIndexData();
-    console.log('calling getPortfolioData()')
     getPortfolioData();
   },[]);
 
   return (
-    <MuiThemeProvider theme={background}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
+      <Navbar/>
       <AppRoot>
-        <Navbar />
         <AppWrapper>
           <AppContainer>
             <AppContent>
