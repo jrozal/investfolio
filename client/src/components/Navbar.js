@@ -8,6 +8,7 @@ const theme = createMuiTheme({
     body1: {
       fontFamily: "'Pacifico', cursive !important",
       fontSize: '30px !important',
+      margin: 'auto'
     }
   },
 });
