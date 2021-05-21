@@ -30,10 +30,10 @@ const AssetAllocation = ({ portfolioAllocation }) => {
             '#bff9e4',
             '#8CDABF',
             '#B5A2CF',
+            '#A9E6E6',
             '#1EBC82',
             '#06734F',
-            '#A5E7E7',
-            '#A9E6E6'
+            '#A5E7E7'
           ],
           hoverOffset: 4
         }
