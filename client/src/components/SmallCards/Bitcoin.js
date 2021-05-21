@@ -12,13 +12,13 @@ import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import { green, red } from '@material-ui/core/colors';
 
 const Bitcoin = (props) => {
-
   const renderCardContent = () => {
-    let trendingArrowComponent = '';
-    let priceChangeComponent = '';
-
     if (props.btc) {
-      if (props.btc.change > 0) {
+      const priceChange = parseFloat(props.btc.change);
+      let trendingArrowComponent = '';
+      let priceChangeComponent = '';
+
+      if (priceChange > 0) {
         trendingArrowComponent = (
           <Avatar
             style={{
@@ -69,7 +69,7 @@ const Bitcoin = (props) => {
               fontWeight: 500
             }}
           >
-            -{props.btc.change}
+            {props.btc.change}
           </Typography>
         );
       };
@@ -86,20 +86,20 @@ const Bitcoin = (props) => {
                 color="textSecondary"
                 variant="h6"
               >
-                  Bitcoin
+                Bitcoin
               </Typography>
               <Typography
                 color="textSecondary"
                 style={{ fontSize: '0.9rem' }}
               >
-                  BTC / U.S. Dollar
+                BTC / U.S. Dollar
               </Typography>
               <Typography
                 color="textPrimary"
                 variant="h4"
                 style={{ paddingTop: 10, paddingBottom: 10 }}
               >
-                  <>{ props.btc === undefined ? '' : '$' + props.btc.today }</>
+                {'$' + props.btc.today}
               </Typography>
             </Grid>
             <Grid item>
@@ -117,7 +117,7 @@ const Bitcoin = (props) => {
               color="textSecondary"
               variant="caption"
             >
-                Last 24h
+              Last 24h
             </Typography>
           </Box>
         </>
