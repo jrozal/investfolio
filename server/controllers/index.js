@@ -33,6 +33,41 @@ function getPortfolioDataFromDb() {
     .catch(err => err)
 };
 
+function updatePortfolioData(req, res) {
+  const key = req.body.column;
+  const val = req.body.value;
+  const symbol = req.body.symbol;
+
+  return models.portfolio
+    .update({ [key]: val }, {
+      where: {
+        symbol: symbol
+      }
+    })
+    .then(data => res.status(204).send(data))
+    .catch(err => res.status(500).send(err))
+};
+
+function addPortfolioData(req, res) {
+  return models.portfolio
+    .create(req.body)
+    .then(data => res.status(201).send(data))
+    .catch(err => res.status(500).send(err))
+};
+
+function deletePortfolioData(req, res) {
+  const symbol = req.body.symbol;
+
+  return models.portfolio
+    .destroy({
+      where: {
+        symbol: symbol
+      }
+    })
+    .then(data => res.status(204).end('Deletion success'))
+    .catch(err => res.status(500).send(err))
+};
+
 function getPortfolioSymbolsFromDb() {
   return models.portfolio
     .findAll({
@@ -54,4 +89,10 @@ function getLiveMarketData(symbols) {
   return api.getPortfolioData(symbols);
 }
 
-module.exports = { getMarketIndexData, getPortfolioData };
+module.exports = {
+  getMarketIndexData,
+  getPortfolioData,
+  updatePortfolioData,
+  addPortfolioData,
+  deletePortfolioData
+};
