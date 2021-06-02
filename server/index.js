@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const bodyParser = require('body-parser');
 const router = require('./routes');
+
+app.use(bodyParser.json());
 
 // establish database connection
 const db = require('../database');
