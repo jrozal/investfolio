@@ -13,9 +13,14 @@ import {
   TableSortLabel,
   Tooltip
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import AddIcon from '@material-ui/icons/Add';
+import InvestmentsModal from './InvestmentsModal';
 
 const Investments = ({ portfolioData }) => {
+  const [modal, setModal] = useState(false);
+
+  const handleOpen = () => setModal(true);
+  const handleClose = () => setModal(false);
 
   return (
     portfolioData !== undefined
@@ -87,13 +92,18 @@ const Investments = ({ portfolioData }) => {
           p={2}
         >
           <Button
+            onClick={handleOpen}
             color="primary"
-            endIcon={<ArrowRightIcon />}
+            endIcon={<AddIcon />}
             size="small"
             variant="text"
           >
-            View all
-        </Button>
+            ADD
+          </Button>
+          <InvestmentsModal
+            open={modal}
+            handleClose={handleClose}
+          />
         </Box>
       </Card>
     : <div>loading..</div>
