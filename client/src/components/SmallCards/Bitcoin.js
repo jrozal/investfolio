@@ -41,7 +41,7 @@ const Bitcoin = (props) => {
               fontWeight: 500
             }}
           >
-            +{props.ndx.change}
+            +{props.btc.change}
           </Typography>
         );
 
