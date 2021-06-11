@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InvestmentsModal = ({ open, handleClose }) => {
+const InvestmentsModal = ({ open, handleClose, addPortfolioData }) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [form, setForm] = useState({
@@ -51,7 +51,8 @@ const InvestmentsModal = ({ open, handleClose }) => {
   };
 
   const handleSubmit = () => {
-    console.log('FORM DATA', form)
+    addPortfolioData(form);
+    handleClose();
   };
 
   const body = (

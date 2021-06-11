@@ -92,6 +92,12 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const addPortfolioData = (form) => {
+    axios.post('/addPortfolioData', form)
+      .then(res => getPortfolioData())
+      .catch(err => console.log('POST error', err));
+  };
+
   useEffect(() => {
     getIndexData();
     getPortfolioData();
@@ -174,7 +180,10 @@ const App = () => {
                       xl={9}
                       xs={12}
                     >
-                      <Investments portfolioData={data.portfolioData.data}/>
+                      <Investments
+                        portfolioData={data.portfolioData.data}
+                        addPortfolioData={addPortfolioData}
+                      />
                     </Grid>
                   </Grid>
                 </Container>

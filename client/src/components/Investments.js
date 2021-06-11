@@ -16,7 +16,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import InvestmentsModal from './InvestmentsModal';
 
-const Investments = ({ portfolioData }) => {
+const Investments = ({ portfolioData, addPortfolioData }) => {
   const [modal, setModal] = useState(false);
 
   const handleOpen = () => setModal(true);
@@ -103,6 +103,7 @@ const Investments = ({ portfolioData }) => {
           <InvestmentsModal
             open={modal}
             handleClose={handleClose}
+            addPortfolioData={addPortfolioData}
           />
         </Box>
       </Card>
