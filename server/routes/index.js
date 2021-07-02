@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const controller = require('../controllers');
 
-router.get('/getIndexData', controller.getMarketIndexData);
+router.get('/index-data', controller.getMarketIndexData);
 
-router.get('/getPortfolioData', controller.getPortfolioData);
+router.get('/portfolio-data', controller.getPortfolioData);
 
-router.put('/updatePortfolioData', controller.updatePortfolioData)
+router.put('/portfolio-data', controller.updatePortfolioData)
 
-router.post('/addPortfolioData', controller.addPortfolioData)
+router.post('/portfolio-data', controller.addPortfolioData)
 
-router.delete('/deletePortfolioData', controller.deletePortfolioData)
+router.delete('/portfolio-data', controller.deletePortfolioData)
 
 module.exports = router;
