@@ -67,7 +67,7 @@ const App = () => {
   });
 
   const getIndexData = () => {
-    axios.get('/getIndexData')
+    axios.get('/index-data')
       .then(res => {
         setData((prevState) => {
           return({
@@ -80,7 +80,7 @@ const App = () => {
   };
 
   const getPortfolioData = () => {
-    axios.get('/getPortfolioData')
+    axios.get('/portfolio-data')
       .then(res => {
         setData((prevState) => {
           return ({
@@ -93,7 +93,7 @@ const App = () => {
   };
 
   const addPortfolioData = (form) => {
-    axios.post('/addPortfolioData', form)
+    axios.post('/portfolio-data', form)
       .then(res => getPortfolioData())
       .catch(err => console.log('POST error', err));
   };
