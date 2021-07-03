@@ -18,49 +18,49 @@ const parseIndexData = (data) => {
 };
 
 // calculate portfolio data for client
-const calculatePortfolioData = async (apiData, queryData) => {
+const calculatePortfolioData = async (apiDataRecord, queryDataRecord) => {
   let newData = [];
   let portfolioAllocation = [];
   let portfolioValue = 0;
 
-  await queryData.forEach((qData, i) => {
-    let aData = apiData[i];
+  await queryDataRecord.forEach((queryData, i) => {
+    let apiData = apiDataRecord[i];
 
-    if (aData.symbol === qData.symbol) {
+    if (apiData.symbol === queryData.symbol) {
 
-      if (aData.symbol.includes('USD')) {
-        let priceChange = (aData.data.c[0] - aData.data.o[0]).toFixed(2);
-        let percentChange = ((priceChange / aData.data.o[0]) * 100).toFixed(2);
-        let profitLossAmount = (qData.shares * priceChange).toFixed(2);
-        let marketValue = (qData.shares * aData.data.c[0]).toFixed(2);
+      if (apiData.symbol.includes('USD')) {
+        let priceChange = (apiData.data.c[0] - apiData.data.o[0]).toFixed(2);
+        let percentChange = ((priceChange / apiData.data.o[0]) * 100).toFixed(2);
+        let profitLossAmount = (queryData.shares * priceChange).toFixed(2);
+        let marketValue = (queryData.shares * apiData.data.c[0]).toFixed(2);
 
         newData[i] = {
-          symbol: qData.symbol,
-          description: qData.description,
-          price: aData.data.c[0],
+          symbol: queryData.symbol,
+          description: queryData.description,
+          price: apiData.data.c[0],
           priceChange: priceChange,
           percentChange: percentChange,
           profitLossAmount: profitLossAmount,
-          quantity: qData.shares,
+          quantity: queryData.shares,
           marketValue: marketValue
         }
 
         portfolioValue += parseFloat(marketValue);
       }
       else {
-        let priceChange = (aData.data.c - aData.data.pc).toFixed(2);
-        let percentChange = ((priceChange / aData.data.pc) * 100).toFixed(2);
-        let profitLossAmount = (qData.shares * priceChange).toFixed(2);
-        let marketValue = (qData.shares * aData.data.c).toFixed(2);
+        let priceChange = (apiData.data.c - apiData.data.pc).toFixed(2);
+        let percentChange = ((priceChange / apiData.data.pc) * 100).toFixed(2);
+        let profitLossAmount = (queryData.shares * priceChange).toFixed(2);
+        let marketValue = (queryData.shares * apiData.data.c).toFixed(2);
 
         newData[i] = {
-          symbol: qData.symbol,
-          description: qData.description,
-          price: aData.data.c,
+          symbol: queryData.symbol,
+          description: queryData.description,
+          price: apiData.data.c,
           priceChange: priceChange,
           percentChange: percentChange,
           profitLossAmount: profitLossAmount,
-          quantity: qData.shares,
+          quantity: queryData.shares,
           marketValue: marketValue
         }
 
@@ -69,14 +69,14 @@ const calculatePortfolioData = async (apiData, queryData) => {
     }
   });
 
-  await queryData.forEach((qData, i) => {
-    let aData = apiData[i];
-    let marketValue = (qData.shares * aData.data.c).toFixed(2);
+  await queryDataRecord.forEach((queryData, i) => {
+    let apiData = apiDataRecord[i];
+    let marketValue = (queryData.shares * apiData.data.c).toFixed(2);
     let calculatedAllocation = (parseFloat(marketValue) / parseFloat(portfolioValue)).toFixed(2);
     newData[i]['portfolioAllocation'] = calculatedAllocation;
 
     portfolioAllocation.push({
-      symbol: qData.symbol,
+      symbol: queryData.symbol,
       portfolioAllocation: calculatedAllocation
     });
   });
