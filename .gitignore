@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# development
+*/dist/bundle.js
+
 # production
 /build
 
