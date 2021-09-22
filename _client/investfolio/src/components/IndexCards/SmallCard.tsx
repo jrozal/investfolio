@@ -8,8 +8,11 @@ import {
 import PriceChange from './PriceChange';
 import TrendingArrow from './TrendingArrow';
 
+interface Props {
+  data: number
+}
 
-const SmallCard = () => {
+const SmallCard = (props: Props) => {
 
   return (
     <Card>
