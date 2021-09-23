@@ -30,12 +30,12 @@ const Investments = () => {
           <Table>
             <TableHead>
               <TableRow>
-                {headings.map((heading) => <TableCell>{heading}</TableCell>)}
+                {headings.map((heading, i) => <TableCell key={i}>{heading}</TableCell>)}
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow hover>
-                {exampleData.map((value) => <TableCell>{value}</TableCell>)}
+                {exampleData.map((value, i) => <TableCell key={i}>{value}</TableCell>)}
               </TableRow>
             </TableBody>
           </Table>
