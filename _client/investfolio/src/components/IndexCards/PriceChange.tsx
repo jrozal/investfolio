@@ -23,7 +23,7 @@ const PriceChange = (props: Props) => {
 
   return (
     <Typography className={classes.price}>
-      {priceChange > 0 ? '+' : '-'}{priceChange}
+      {priceChange > 0 && '+'}{priceChange}
     </Typography>
   )
 };
