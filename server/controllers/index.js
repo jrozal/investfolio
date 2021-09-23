@@ -1,5 +1,5 @@
 const api = require('../api');
-const { models } = require('../../database/');
+const { models } = require('../database/');
 const { calculatePortfolioData } = require('../helpers');
 
 function getMarketIndexData(req, res) {
