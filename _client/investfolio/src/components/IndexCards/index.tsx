@@ -3,7 +3,7 @@ import React from 'react';
 import SmallCard from './SmallCard';
 
 interface Props {
-  marketData: [number, number, number, number]
+  marketData: number[]
 }
 
 
