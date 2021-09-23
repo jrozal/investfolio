@@ -10,8 +10,9 @@ interface Props {
 const IndexCards = (props: Props) => {
   return (
     <React.Fragment>
-      {props.marketData.map((item: number) => (
+      {props.marketData.map((item: number, i: number) => (
         <Grid
+          key={i}
           item
           lg={3}
           sm={6}
