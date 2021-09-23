@@ -37,7 +37,7 @@ const SmallCard = (props: Props) => {
             </Typography>
           </Grid>
           <Grid item>
-            <TrendingArrow priceChange={1}/>
+            <TrendingArrow priceChange={props.data}/>
           </Grid>
         </Grid>
         <Box
@@ -46,7 +46,7 @@ const SmallCard = (props: Props) => {
             display: 'flex'
           }}
         >
-          <PriceChange priceChange={1}/>
+          <PriceChange priceChange={props.data}/>
           <Typography>
             Last 24h
           </Typography>
