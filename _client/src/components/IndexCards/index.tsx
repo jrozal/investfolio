@@ -1,16 +1,21 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
 import SmallCard from './SmallCard';
 
-interface Props {
-  marketData: number[]
+interface IndexData {
+  symbol: string,
+  today: string,
+  yesterday: string,
+  change: string
 }
 
+interface Props {
+  indexData: IndexData[];
+}
 
-const IndexCards = (props: Props) => {
+const IndexCards = ({ indexData }: Props) => {
   return (
-    <React.Fragment>
-      {props.marketData.map((item: number, i: number) => (
+    <>
+      {indexData.map((item, i) => (
         <Grid
           key={i}
           item
@@ -22,7 +27,7 @@ const IndexCards = (props: Props) => {
           <SmallCard data={item}/>
         </Grid>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 

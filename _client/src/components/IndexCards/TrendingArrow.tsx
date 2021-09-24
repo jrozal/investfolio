@@ -20,8 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TrendingArrow = (props: Props) => {
-  const priceChange = props.priceChange;
+const TrendingArrow = ({ priceChange }: Props) => {
   const classes = useStyles(priceChange);
 
   return (

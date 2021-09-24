@@ -10,15 +10,14 @@ const useStyles = makeStyles({
   price: {
     paddingRight: 10,
     fontSize: '1rem',
-    fontWeight: 500,
+    fontWeight: 700,
     color: (props) => props > 0
-    ? green[900]
-    : red[900]
+    ? green[600]
+    : red[600]
   }
 });
 
-const PriceChange = (props: Props) => {
-  const priceChange = props.priceChange;
+const PriceChange = ({ priceChange }: Props) => {
   const classes = useStyles(priceChange);
 
   return (

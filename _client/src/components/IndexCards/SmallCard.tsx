@@ -9,10 +9,23 @@ import PriceChange from './PriceChange';
 import TrendingArrow from './TrendingArrow';
 
 interface Props {
-  data: number
+  data: {
+    symbol: string,
+    today: string,
+    yesterday: string,
+    change: string
+  }
 }
 
-const SmallCard = (props: Props) => {
+const SmallCard = ({ data }: Props) => {
+  const { symbol, today, change } = data;
+  const priceChange = parseFloat(change);
+  const symbolDescription: { [key: string]: string } = {
+    'SPX': 'S&P 500',
+    'RUT': 'Russell 2000',
+    'NDX': 'Nasdaq 100',
+    'BTC/USD': 'Bitcoin'
+  };
 
   return (
     <Card>
@@ -27,17 +40,24 @@ const SmallCard = (props: Props) => {
               color="textSecondary"
               variant="h6"
             >
-              S&P 500
+              {symbolDescription[symbol]}
             </Typography>
             <Typography
               color="textSecondary"
               style={{ fontSize: '0.9rem' }}
             >
-              SPX
+              {symbol}
+            </Typography>
+            <Typography
+              color="textPrimary"
+              variant="h4"
+              style={{ paddingTop: 10, paddingBottom: 10 }}
+            >
+              {today}
             </Typography>
           </Grid>
           <Grid item>
-            <TrendingArrow priceChange={props.data}/>
+            <TrendingArrow priceChange={priceChange}/>
           </Grid>
         </Grid>
         <Box
@@ -46,7 +66,7 @@ const SmallCard = (props: Props) => {
             display: 'flex'
           }}
         >
-          <PriceChange priceChange={props.data}/>
+          <PriceChange priceChange={priceChange}/>
           <Typography>
             Last 24h
           </Typography>
