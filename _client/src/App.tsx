@@ -5,6 +5,8 @@ import IndexCards from './components/IndexCards';
 import Navbar from "./components/Navbar";
 import AssetAllocation from "./components/AssetAllocation";
 import PercentReturn from "./components/PercentReturn";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const theme = createTheme({
   palette: {
@@ -35,6 +37,7 @@ const useStyles = makeStyles({
   },
   content: {
     display: 'flex',
+    justifyContent: 'center',
     flex: '1 1 auto',
     overflow: 'hidden',
     paddingTop: 24,
@@ -45,7 +48,25 @@ const useStyles = makeStyles({
 
 const App = () => {
   const classes = useStyles();
-  const tempData = [-2, -1, 0.5, 1];
+  const [portfolioData, setPortfolioData] = useState([]);
+  const [assetAllocationData, setAssetAllocationData] = useState([]);
+  const [indexData, setIndexData] = useState([]);
+
+  const getPortfolioData = async () => {
+    const response = await axios.get('http://localhost:3001/portfolio-data')
+    setPortfolioData(response.data.data)
+    setAssetAllocationData(response.data.portfolioAllocation);
+  };
+
+  const getIndexData = async () => {
+    const response = await axios.get('http://localhost:3001/index-data');
+    setIndexData(response.data);
+  };
+
+  useEffect(() => {
+    getPortfolioData();
+    getIndexData();
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,10 +78,10 @@ const App = () => {
             <Box>
               <Container>
                 <Grid container spacing={3}>
-                  <IndexCards marketData={tempData} />
-                  <AssetAllocation />
-                  <PercentReturn />
-                  <Investments />
+                  <IndexCards indexData={indexData} />
+                  <AssetAllocation assetAllocationData={assetAllocationData}/>
+                  <PercentReturn dailyPercentReturn={portfolioData}/>
+                  <Investments portfolioData={portfolioData}/>
                 </Grid>
               </Container>
             </Box>
