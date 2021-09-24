@@ -20,6 +20,7 @@
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
+    "ansi-regex": "^6.0.1",
     "nodemon": "^2.0.13"
   }
 }
