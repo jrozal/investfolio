@@ -24,10 +24,10 @@ interface PortfolioData {
 };
 
 interface Props {
-  data: PortfolioData[];
+  portfolioData: PortfolioData[];
 }
 
-const Investments = ({ data }: Props) => {
+const Investments = ({ portfolioData }: Props) => {
   const headings = ['Symbol', 'Description', 'Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
 
   return (
@@ -49,7 +49,7 @@ const Investments = ({ data }: Props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((record, i) => (
+              {portfolioData.map((record, i) => (
                 <TableRow hover key={i}>
                   <TableCell>{record.symbol}</TableCell>
                   <TableCell>{record.description}</TableCell>
