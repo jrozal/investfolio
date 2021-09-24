@@ -1,23 +1,34 @@
 import { Box, Card, CardContent, CardHeader, Divider, Grid } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 import { Bar } from "react-chartjs-2";
 
-const PercentReturn = () => {
+interface PortfolioData {
+  symbol: string,
+  description: string,
+  price: number,
+  priceChange: string,
+  percentChange: string,
+  profitLossAmount: string,
+  quantity: number,
+  marketValue: string,
+  portfolioAllocation: string
+};
+
+interface Props {
+  dailyPercentReturn: PortfolioData[];
+}
+
+const PercentReturn = ({ dailyPercentReturn }: Props) => {
+  const chartLables = dailyPercentReturn.map(data => data.symbol);
+  const dataSet = dailyPercentReturn.map(data => parseFloat(data.percentChange));
+  const colors = dataSet.map(value => value < 0 ? red[300] : green[300]);
 
   const data = {
-    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet', 'Black'],
+    labels: chartLables,
     datasets: [
       {
-        backgroundColor: [
-          '#E7F09F',
-          '#5760A0',
-          '#8B94C0',
-          '#07B088',
-          '#12123D',
-          '#E7F09F',
-          '#5760A0',
-          '#8B94C0',
-        ],
-        data: [-3, -2, -1, -0.5, 0.5, 1, 2, 3]
+        backgroundColor: colors,
+        data: dataSet
       }
     ],
   }
