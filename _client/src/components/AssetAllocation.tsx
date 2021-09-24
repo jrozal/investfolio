@@ -1,19 +1,40 @@
 import { Box, Card, CardContent, CardHeader, Divider, Grid } from "@material-ui/core";
 import { Pie } from 'react-chartjs-2';
 
+interface AssetAllocationData {
+  symbol: string,
+  portfolioAllocation: string
+}
 
-const AssetAllocation = () => {
+interface Props {
+  assetAllocationData: AssetAllocationData[];
+}
+
+const AssetAllocation = ({ assetAllocationData }: Props) => {
+  const chartLabels = assetAllocationData.map(data => data.symbol);
+  const dataSet = assetAllocationData.map(data => (
+    (parseFloat(data.portfolioAllocation) * 100)
+  ));
+
+
   const data = {
-    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+    labels: chartLabels,
     datasets: [
       {
-        data: [20, 20, 20, 20, 20],
+        data: dataSet,
         backgroundColor: [
           '#E7F09F',
           '#5760A0',
           '#8B94C0',
           '#07B088',
           '#12123D',
+          '#bff9e4',
+          '#8CDABF',
+          '#B5A2CF',
+          '#A9E6E6',
+          '#1EBC82',
+          '#06734F',
+          '#A5E7E7'
         ],
         hoverOffset: 4
       }
