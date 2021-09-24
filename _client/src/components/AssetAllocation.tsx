@@ -34,7 +34,7 @@ const AssetAllocation = () => {
       item
       lg={6}
       md={6}
-      xl={3}
+      xl={6}
       xs={12}
     >
       <Card>
