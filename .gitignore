@@ -8,6 +8,7 @@
 
 # development
 */dist/bundle.js
+exampleData.ts
 
 # production
 /build
