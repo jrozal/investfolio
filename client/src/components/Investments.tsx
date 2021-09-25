@@ -10,6 +10,8 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 interface PortfolioData {
   symbol: string,
@@ -41,28 +43,30 @@ const Investments = ({ portfolioData }: Props) => {
       <Card>
         <CardHeader title="Portfolio"/>
         <Divider/>
-        <Box minWidth={800}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {headings.map((heading, i) => <TableCell key={i}>{heading}</TableCell>)}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {portfolioData.map((record, i) => (
-                <TableRow hover key={i}>
-                  <TableCell>{record.symbol}</TableCell>
-                  <TableCell>{record.description}</TableCell>
-                  <TableCell>{record.price}</TableCell>
-                  <TableCell>{record.priceChange}</TableCell>
-                  <TableCell>{record.percentChange}</TableCell>
-                  <TableCell>{record.profitLossAmount}</TableCell>
-                  <TableCell>{record.quantity}</TableCell>
+        <PerfectScrollbar>
+          <Box sx={{ minWidth: 800 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headings.map((heading, i) => <TableCell key={i}>{heading}</TableCell>)}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
+              </TableHead>
+              <TableBody>
+                {portfolioData.map((record, i) => (
+                  <TableRow hover key={i}>
+                    <TableCell>{record.symbol}</TableCell>
+                    <TableCell>{record.description}</TableCell>
+                    <TableCell>{record.price}</TableCell>
+                    <TableCell>{record.priceChange}</TableCell>
+                    <TableCell>{record.percentChange}</TableCell>
+                    <TableCell>{record.profitLossAmount}</TableCell>
+                    <TableCell>{record.quantity}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </PerfectScrollbar>
       </Card>
     </Grid>
   )
