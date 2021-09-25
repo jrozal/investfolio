@@ -26,22 +26,19 @@ const useStyles = makeStyles({
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
-    width: '90%',
-    margin: 'auto'
+    width: '100%'
   },
   wrapper: {
     display: 'flex',
+    justifyContent: 'center',
     flex: '1 1 auto',
     overflow: 'hidden',
     paddingTop: 64
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    flex: '1 1 auto',
-    overflow: 'hidden',
     paddingTop: 24,
-    paddingBottom: 24
+    paddingBottom: 24,
+    overflow: 'auto'
   },
 });
 
