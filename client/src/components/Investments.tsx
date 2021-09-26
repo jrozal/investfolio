@@ -11,7 +11,6 @@ import {
   TableRow,
 } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 
 interface PortfolioData {
   symbol: string,

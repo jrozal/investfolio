@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import AssetAllocation from "./components/AssetAllocation";
 import PercentReturn from "./components/PercentReturn";
 import { useEffect, useState } from "react";
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import axios from "axios";
 
 const theme = createTheme({
