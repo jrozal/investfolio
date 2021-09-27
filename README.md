@@ -2,7 +2,7 @@
 
 Investment portfolio dashboard and stock / crypto tracking application
 
-![mockup](./mockup.png)
+![mockup](client/src/mockup.png)
 
 ## Technologies Used
 
