@@ -1,16 +1,21 @@
 import {
   Box,
+  Button,
   Card,
   CardHeader,
   Divider,
   Grid,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import useModal from '../../useModal';
+import AddInvestmentModal from './AddInvestmentModal';
 
 interface PortfolioData {
   symbol: string,
@@ -28,8 +33,24 @@ interface Props {
   portfolioData: PortfolioData[];
 }
 
+const useStyles = makeStyles({
+  addCard: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '3rem',
+    boxShadow: 'none'
+  },
+  addButton: {
+    padding: 16
+  }
+});
+
 const Investments = ({ portfolioData }: Props) => {
+  const classes = useStyles();
   const headings = ['Symbol', 'Description', 'Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
+  const { open, toggle } = useModal();
+
+  const handleClick = () => toggle();
 
   return (
     <Grid
@@ -40,7 +61,18 @@ const Investments = ({ portfolioData }: Props) => {
       xs={12}
     >
       <Card>
-        <CardHeader title="Portfolio"/>
+        <Card className={classes.addCard}>
+          <CardHeader title="Portfolio"/>
+          <Button
+            className={classes.addButton}
+            endIcon={<AddBoxIcon/>}
+            size="small"
+            onClick={handleClick}
+          >
+            Add Investment
+          </Button>
+        </Card>
+        <AddInvestmentModal open={open} close={toggle}/>
         <Divider/>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 800 }}>
