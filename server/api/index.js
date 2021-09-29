@@ -35,10 +35,8 @@ function generateFinnhubUrls(symbols) {
 
   symbols.forEach((symbol) => {
     if (symbol.includes('USD')) {
-      // let newSymbol = symbol.split('/').join('') + 'T';
       let newSymbol = symbol.split('/').join('-');
       urls.push(
-        // axios.get(`${finnhubURL}/crypto/candle?symbol=BINANCE:${newSymbol}&resolution=D&from=${from}&to=${to}&token=${finnhubApiKey}`)
         axios.get(`https://api.pro.coinbase.com/products/${newSymbol}/stats`)
       );
     } else {
@@ -64,7 +62,6 @@ function getPortfolioData(symbols) {
           data: res[i].data
         })
       })
-      console.log(results)
       return results;
     })
     .catch(err => console.log(err))
