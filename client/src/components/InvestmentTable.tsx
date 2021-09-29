@@ -13,14 +13,17 @@ import {
   TableRow,
 } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { useState } from "react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import useModal from '../../useModal';
-import AddInvestmentModal from './AddInvestmentModal';
+import useModals from '../useModals';
+import AddInvestmentModal from './Modals/AddInvestment';
+import UpdateInvestmentModal from './Modals/UpdateInvestment';
 
 interface PortfolioData {
   symbol: string,
   description: string,
   price: number,
+  pricePaid: string,
   priceChange: string,
   percentChange: string,
   profitLossAmount: string,
@@ -31,7 +34,14 @@ interface PortfolioData {
 
 interface Props {
   portfolioData: PortfolioData[];
-}
+};
+
+interface PortfolioRecord {
+  symbol: string | null,
+  description: string | null,
+  pricePaid: string | null,
+  quantity: number | null,
+};
 
 const useStyles = makeStyles({
   addCard: {
@@ -42,15 +52,26 @@ const useStyles = makeStyles({
   },
   addButton: {
     padding: 16
+  },
+  tableRow: {
+    cursor: 'pointer'
   }
 });
 
 const Investments = ({ portfolioData }: Props) => {
   const classes = useStyles();
   const headings = ['Symbol', 'Description', 'Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
-  const { open, toggle } = useModal();
+  const { open, toggle } = useModals();
+  const [portfolioRecord, setPortfolioRecord] = useState<PortfolioRecord>({
+    symbol: null,
+    description: null,
+    pricePaid: null,
+    quantity: null
+  })
 
-  const handleClick = () => toggle();
+  const handleClick = (modal: string) => {
+    toggle(modal);
+  };
 
   return (
     <Grid
@@ -67,12 +88,20 @@ const Investments = ({ portfolioData }: Props) => {
             className={classes.addButton}
             endIcon={<AddBoxIcon/>}
             size="small"
-            onClick={handleClick}
+            onClick={() => handleClick('add-investment')}
           >
             Add Investment
           </Button>
         </Card>
-        <AddInvestmentModal open={open} close={toggle}/>
+        <AddInvestmentModal
+          open={open === 'add-investment'}
+          close={toggle}
+        />
+        <UpdateInvestmentModal
+          portfolioRecord={portfolioRecord}
+          open={open === 'update-investment'}
+          close={toggle}
+        />
         <Divider/>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 800 }}>
@@ -84,7 +113,20 @@ const Investments = ({ portfolioData }: Props) => {
               </TableHead>
               <TableBody>
                 {portfolioData.map((record, i) => (
-                  <TableRow hover key={i}>
+                  <TableRow
+                    hover
+                    key={i}
+                    className={classes.tableRow}
+                    onClick={()=> {
+                      handleClick('update-investment')
+                      setPortfolioRecord({
+                        symbol: record.symbol,
+                        description: record.description,
+                        pricePaid: record.pricePaid,
+                        quantity: record.quantity
+                      })
+                    }}
+                  >
                     <TableCell>{record.symbol}</TableCell>
                     <TableCell>{record.description}</TableCell>
                     <TableCell>{record.price}</TableCell>
