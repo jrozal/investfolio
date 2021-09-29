@@ -9,7 +9,6 @@ const config = {
     dialect: 'mysql'
   },
   finnhubApiKey: process.env.FINNHUB_API_KEY,
-  twelvedataApiKey: process.env.TWELVEDATA_API_KEY
 };
 
 module.exports = config;
