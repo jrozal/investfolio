@@ -3,9 +3,8 @@ import SmallCard from './SmallCard';
 
 interface IndexData {
   symbol: string,
-  today: string,
-  yesterday: string,
-  change: string
+  today: number,
+  change: number
 }
 
 interface Props {

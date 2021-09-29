@@ -11,19 +11,18 @@ import TrendingArrow from './TrendingArrow';
 interface Props {
   data: {
     symbol: string,
-    today: string,
-    yesterday: string,
-    change: string
+    today: number,
+    change: number
   }
 }
 
 const SmallCard = ({ data }: Props) => {
   const { symbol, today, change } = data;
-  const priceChange = parseFloat(change);
+  const priceChange = parseFloat(change.toFixed(2));
   const symbolDescription: { [key: string]: string } = {
-    'SPX': 'S&P 500',
-    'RUT': 'Russell 2000',
-    'NDX': 'Nasdaq 100',
+    'SPY': 'S&P 500',
+    'IWM': 'Russell 2000',
+    'QQQ': 'Nasdaq 100',
     'BTC/USD': 'Bitcoin'
   };
 
