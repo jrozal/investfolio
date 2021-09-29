@@ -60,7 +60,6 @@ const AddInvestmentModal = (props: Props) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log(values)
     setValues({
       symbol: '',
       description: '',
