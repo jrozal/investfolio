@@ -8,7 +8,12 @@ const useStyles = makeStyles({
     paddingTop: 15,
     paddingBottom: 15,
     paddingRight: 15,
-    color: '#3c4858'
+    color: '#3c4858',
+
+    '& a': {
+      textDecoration: 'none',
+      fontWeight: 700
+    }
   }
 })
 
