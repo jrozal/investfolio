@@ -20,10 +20,9 @@ const IndexCards = ({ indexData }: Props) => {
           item
           lg={3}
           sm={6}
-          xl={3}
           xs={12}
         >
-          <SmallCard data={item}/>
+          <SmallCard data={item} />
         </Grid>
       ))}
     </>
