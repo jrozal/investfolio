@@ -1,10 +1,11 @@
 import { Box, Container, CssBaseline, Grid, makeStyles } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import Investments from "./components/Investments";
-import IndexCards from './components/IndexCards';
 import Navbar from "./components/Navbar";
+import IndexCards from './components/IndexCards';
 import AssetAllocation from "./components/AssetAllocation";
 import PercentReturn from "./components/PercentReturn";
+import Investments from "./components/InvestmentTable";
+import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import axios from "axios";
@@ -68,8 +69,8 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <Navbar/>
+      <CssBaseline />
+      <Navbar />
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <div className={classes.content}>
@@ -77,15 +78,16 @@ const App = () => {
               <Container>
                 <Grid container spacing={3}>
                   <IndexCards indexData={indexData} />
-                  <AssetAllocation assetAllocationData={assetAllocationData}/>
-                  <PercentReturn dailyPercentReturn={portfolioData}/>
-                  <Investments portfolioData={portfolioData}/>
+                  <AssetAllocation assetAllocationData={assetAllocationData} />
+                  <PercentReturn dailyPercentReturn={portfolioData} />
+                  <Investments portfolioData={portfolioData} />
                 </Grid>
               </Container>
             </Box>
           </div>
         </div>
       </div>
+      <Footer />
     </ThemeProvider>
   )
 };
