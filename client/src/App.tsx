@@ -1,5 +1,5 @@
 import { Box, Container, CssBaseline, Grid, makeStyles } from "@material-ui/core";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Navbar from "./components/Navbar";
 import IndexCards from './components/IndexCards';
 import AssetAllocation from "./components/AssetAllocation";
@@ -7,21 +7,16 @@ import PercentReturn from "./components/PercentReturn";
 import Investments from "./components/InvestmentTable";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import axios from "axios";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import { theme } from "./themes/theme";
+import API from "./api";
 
-const theme = createTheme({
-  palette: {
-    background: {
-      default: '#f2f2f2'
-    }
-  },
-  typography: {
-    h5: {
-      fontSize: '1.25rem'
-    }
-  }
-});
+interface PortfolioRecord {
+  symbol: string | null,
+  description: string | null,
+  pricePaid: string | null,
+  quantity: number | string | null,
+};
 
 const useStyles = makeStyles({
   root: {
@@ -44,7 +39,6 @@ const useStyles = makeStyles({
   },
 });
 
-
 const App = () => {
   const classes = useStyles();
   const [portfolioData, setPortfolioData] = useState([]);
@@ -52,14 +46,55 @@ const App = () => {
   const [indexData, setIndexData] = useState([]);
 
   const getPortfolioData = async () => {
-    const response = await axios.get('http://localhost:3001/portfolio-data')
-    setPortfolioData(response.data.data)
-    setAssetAllocationData(response.data.portfolioAllocation);
+    try {
+      const response = await API.get('/portfolio-data');
+      setPortfolioData(response.data.data)
+      setAssetAllocationData(response.data.portfolioAllocation);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const getIndexData = async () => {
-    const response = await axios.get('http://localhost:3001/index-data');
-    setIndexData(response.data);
+    try {
+      const response = await API.get('/index-data');
+      setIndexData(response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const addPortfolioData = async (values: PortfolioRecord) => {
+    try {
+      const response = await API.post('/portfolio-data', values);
+      if (response.statusText === 'Created') {
+        getPortfolioData();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const updatePortfolioData = async (values: PortfolioRecord) => {
+    try {
+      const response = await API.patch('/portfolio-data', values);
+      if (response.statusText === 'Update success') {
+        getPortfolioData();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const deletePortfolioData = async (symbol: string | null) => {
+    try {
+      const response = await API.delete('/portfolio-data', { data: { symbol: symbol } });
+      if (response.statusText === 'Deletion success') {
+        getPortfolioData();
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
@@ -80,7 +115,12 @@ const App = () => {
                   <IndexCards indexData={indexData} />
                   <AssetAllocation assetAllocationData={assetAllocationData} />
                   <PercentReturn dailyPercentReturn={portfolioData} />
-                  <Investments portfolioData={portfolioData} />
+                  <Investments
+                    portfolioData={portfolioData}
+                    addPortfolioData={addPortfolioData}
+                    updatePortfolioData={updatePortfolioData}
+                    deletePortfolioData={deletePortfolioData}
+                  />
                 </Grid>
               </Container>
             </Box>
