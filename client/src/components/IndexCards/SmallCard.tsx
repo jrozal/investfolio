@@ -18,6 +18,7 @@ interface Props {
 
 const SmallCard = ({ data }: Props) => {
   const { symbol, today, change } = data;
+  const todayPrice = (today / 1).toFixed(2);
   const priceChange = parseFloat(change.toFixed(2));
   const symbolDescription: { [key: string]: string } = {
     'SPY': 'S&P 500',
@@ -51,7 +52,7 @@ const SmallCard = ({ data }: Props) => {
               variant="h4"
               style={{ paddingTop: 10, paddingBottom: 10 }}
             >
-              {today}
+              {todayPrice}
             </Typography>
           </Grid>
           <Grid item>
