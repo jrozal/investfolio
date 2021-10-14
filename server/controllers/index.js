@@ -34,23 +34,34 @@ function getPortfolioDataFromDb() {
 };
 
 function updatePortfolioData(req, res) {
-  const key = req.body.column;
-  const val = req.body.value;
   const symbol = req.body.symbol;
+  const updatedRecord = {
+    description: req.body.description,
+    shares: req.body.quantity,
+    pricePaid: req.body.pricePaid,
+  };
 
   return models.portfolio
-    .update({ [key]: val }, {
-      where: {
-        symbol: symbol
-      }
+    .update(updatedRecord,{
+      where: { symbol: symbol }
     })
-    .then(data => res.status(204).send(data))
+    .then(data => {
+      res.statusMessage = 'Update success';
+      res.status(204).end();
+    })
     .catch(err => res.status(500).send(err))
 };
 
 function addPortfolioData(req, res) {
+  const newRecord = {
+    symbol: req.body.symbol,
+    description: req.body.description,
+    shares: req.body.quantity,
+    pricePaid: req.body.pricePaid
+  };
+
   return models.portfolio
-    .create(req.body)
+    .create(newRecord)
     .then(data => res.status(201).send(data))
     .catch(err => res.status(500).send(err))
 };
@@ -64,7 +75,10 @@ function deletePortfolioData(req, res) {
         symbol: symbol
       }
     })
-    .then(data => res.status(204).end('Deletion success'))
+    .then(data => {
+      res.statusMessage = 'Deletion success';
+      res.status(204).end();
+    })
     .catch(err => res.status(500).send(err))
 };
 
