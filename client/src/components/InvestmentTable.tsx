@@ -15,7 +15,7 @@ import {
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { useState } from "react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import useModals from '../useModals';
+import useModals from '../hooks/useModals';
 import AddInvestmentModal from './Modals/AddInvestment';
 import UpdateInvestmentModal from './Modals/UpdateInvestment';
 
@@ -34,13 +34,16 @@ interface PortfolioData {
 
 interface Props {
   portfolioData: PortfolioData[];
+  addPortfolioData: (values: PortfolioRecord) => void,
+  updatePortfolioData: (values: PortfolioRecord) => void,
+  deletePortfolioData: (symbol: string | null) => void,
 };
 
 interface PortfolioRecord {
   symbol: string | null,
   description: string | null,
   pricePaid: string | null,
-  quantity: number | null,
+  quantity: number | string | null,
 };
 
 const useStyles = makeStyles({
@@ -58,7 +61,8 @@ const useStyles = makeStyles({
   }
 });
 
-const Investments = ({ portfolioData }: Props) => {
+const Investments = (props: Props) => {
+  const { portfolioData, addPortfolioData, updatePortfolioData, deletePortfolioData } = props;
   const classes = useStyles();
   const headings = ['Symbol', 'Description', 'Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
   const { open, toggle } = useModals();
@@ -96,11 +100,14 @@ const Investments = ({ portfolioData }: Props) => {
         <AddInvestmentModal
           open={open === 'add-investment'}
           close={toggle}
+          addPortfolioData={addPortfolioData}
         />
         <UpdateInvestmentModal
           portfolioRecord={portfolioRecord}
           open={open === 'update-investment'}
           close={toggle}
+          updatePortfolioData={updatePortfolioData}
+          deletePortfolioData={deletePortfolioData}
         />
         <Divider/>
         <PerfectScrollbar>
@@ -118,13 +125,13 @@ const Investments = ({ portfolioData }: Props) => {
                     key={i}
                     className={classes.tableRow}
                     onClick={()=> {
-                      handleClick('update-investment')
                       setPortfolioRecord({
                         symbol: record.symbol,
                         description: record.description,
                         pricePaid: record.pricePaid,
                         quantity: record.quantity
-                      })
+                      });
+                      handleClick('update-investment');
                     }}
                   >
                     <TableCell>{record.symbol}</TableCell>

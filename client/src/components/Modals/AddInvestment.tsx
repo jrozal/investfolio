@@ -3,8 +3,16 @@ import React, { useState } from "react";
 
 interface Props {
   open: boolean,
-  close: () => void;
+  close: () => void,
+  addPortfolioData: (values: PortfolioRecord) => void,
 }
+
+interface PortfolioRecord {
+  symbol: string | null,
+  description: string | null,
+  pricePaid: string | null,
+  quantity: number | string | null,
+};
 
 const useStyles = makeStyles({
   paper: {
@@ -42,12 +50,12 @@ const useStyles = makeStyles({
 });
 
 const AddInvestmentModal = (props: Props) => {
-  const { open, close } = props;
+  const { open, close, addPortfolioData } = props;
   const classes = useStyles();
   const [values, setValues] = useState({
     symbol: '',
     description: '',
-    shares: '',
+    quantity: '',
     pricePaid: ''
   });
 
@@ -63,9 +71,10 @@ const AddInvestmentModal = (props: Props) => {
     setValues({
       symbol: '',
       description: '',
-      shares: '',
+      quantity: '',
       pricePaid: ''
     });
+    addPortfolioData(values);
     close();
   };
 
@@ -88,11 +97,11 @@ const AddInvestmentModal = (props: Props) => {
             value={values.description}
           />
           <TextField
-            id="shares"
+            id="quantity"
             label="Shares"
             variant="filled"
             required
-            value={values.shares}
+            value={values.quantity}
           />
           <TextField
             id="pricePaid"

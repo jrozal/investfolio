@@ -1,16 +1,19 @@
 import { Button, makeStyles, Modal, TextField, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
 
 interface PortfolioRecord {
   symbol: string | null,
   description: string | null,
   pricePaid: string | null,
-  quantity: number | null,
-}
+  quantity: number | string | null,
+};
 
 interface Props {
   portfolioRecord: PortfolioRecord,
   open: boolean,
-  close: () => void;
+  close: () => void,
+  updatePortfolioData: (values: PortfolioRecord) => void,
+  deletePortfolioData: (symbol: string | null) => void,
 };
 
 const useStyles = makeStyles({
@@ -58,7 +61,43 @@ const useStyles = makeStyles({
 
 const UpdateInvestmentModal = (props: Props) => {
   const classes = useStyles();
-  const { portfolioRecord, open, close } = props;
+  const { portfolioRecord, open, close, updatePortfolioData, deletePortfolioData } = props;
+  const [values, setValues] = useState<PortfolioRecord>({
+    symbol: null,
+    description: null,
+    pricePaid: null,
+    quantity: null
+  });
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    setValues({
+      ...values,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  const handleUpdate = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    console.log('submitting', values)
+    updatePortfolioData(values);
+    setValues({
+      symbol: null,
+      description: null,
+      pricePaid: null,
+      quantity: null
+    });
+    close();
+  };
+
+  const handleDelete = () => {
+    deletePortfolioData(portfolioRecord.symbol);
+    close();
+  };
+
+  useEffect(() => {
+    setValues(portfolioRecord);
+  }, [portfolioRecord]);
 
   return (
     <Modal open={open} onClose={close}>
@@ -66,18 +105,21 @@ const UpdateInvestmentModal = (props: Props) => {
         <div className={classes.container}>
           <Typography variant="h5">{portfolioRecord.symbol}</Typography>
           <Typography variant="h6">Update Investment</Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onChange={handleInputChange}>
             <TextField
+              id="description"
               label="Description"
-              value={portfolioRecord.description}
+              defaultValue={portfolioRecord.description}
             />
             <TextField
+              id="quantity"
               label="Shares"
-              value={portfolioRecord.quantity}
+              defaultValue={portfolioRecord.quantity}
             />
             <TextField
+              id="pricePaid"
               label="Price Paid"
-              value={portfolioRecord.pricePaid}
+              defaultValue={portfolioRecord.pricePaid}
             />
           </form>
           <div className={classes.formButtons}>
@@ -91,6 +133,7 @@ const UpdateInvestmentModal = (props: Props) => {
               variant="contained"
               type="submit"
               color="primary"
+              onClick={handleUpdate}
             >
               Sumbit
             </Button>
@@ -98,6 +141,7 @@ const UpdateInvestmentModal = (props: Props) => {
           <Button
             variant="contained"
             color="secondary"
+            onClick={handleDelete}
           >
             Delete Record
           </Button>
