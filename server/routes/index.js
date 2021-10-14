@@ -5,7 +5,7 @@ router.get('/index-data', controller.getMarketIndexData);
 
 router.get('/portfolio-data', controller.getPortfolioData);
 
-router.put('/portfolio-data', controller.updatePortfolioData)
+router.patch('/portfolio-data', controller.updatePortfolioData)
 
 router.post('/portfolio-data', controller.addPortfolioData)
 
