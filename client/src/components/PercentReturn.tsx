@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Divider, Grid } from "@material-ui/core";
+import { Box, Card, CardContent, CardHeader, Grid } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import { Bar } from "react-chartjs-2";
 
@@ -50,7 +50,6 @@ const PercentReturn = ({ dailyPercentReturn }: Props) => {
     >
       <Card style={{ height: '100%' }}>
         <CardHeader title="Daily Percentage Returns"/>
-        <Divider />
         <CardContent>
           <Box>
             <Bar

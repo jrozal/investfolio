@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardHeader,
-  Divider,
   Grid,
   makeStyles,
   Table,
@@ -109,7 +108,6 @@ const Investments = (props: Props) => {
           updatePortfolioData={updatePortfolioData}
           deletePortfolioData={deletePortfolioData}
         />
-        <Divider/>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 800 }}>
             <Table>
