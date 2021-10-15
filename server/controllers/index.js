@@ -1,10 +1,14 @@
 const api = require('../api');
 const { models } = require('../database/');
 const { calculatePortfolioData } = require('../helpers');
+const { setCache } = require('../services/cache');
 
 function getMarketIndexData(req, res) {
   api.getMarketIndexData()
-    .then(data => res.status(200).send(data))
+    .then(data => {
+      setCache(req.route.path, data);
+      res.status(200).send(data)
+    })
     .catch(err => res.status(500).send(err))
 };
 
@@ -17,7 +21,10 @@ async function getPortfolioData(req, res) {
     .then(([apiData, queryData]) => {
       return calculatePortfolioData(apiData, queryData);
     })
-    .then(data => res.status(200).send(data))
+    .then(data => {
+      setCache(req.route.path, data);
+      res.status(200).send(data)
+    })
     .catch(err => res.status(500).send(err))
 };
 

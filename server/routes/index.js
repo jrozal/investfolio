@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const controller = require('../controllers');
+const { cache } = require('../services/cache');
 
-router.get('/index-data', controller.getMarketIndexData);
+router.get('/index-data', cache, controller.getMarketIndexData);
 
-router.get('/portfolio-data', controller.getPortfolioData);
+router.get('/portfolio-data', cache, controller.getPortfolioData);
 
 router.patch('/portfolio-data', controller.updatePortfolioData)
 
