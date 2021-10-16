@@ -1,6 +1,6 @@
 import { Box, Container, CssBaseline, Grid, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import IndexCards from './components/IndexCards';
 import AssetAllocation from "./components/AssetAllocation";
 import PercentReturn from "./components/PercentReturn";
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     paddingTop: 64
   },
   content: {
-    paddingTop: 24,
+    paddingTop: 56,
     paddingBottom: 24,
     overflow: 'auto'
   },
@@ -105,7 +105,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar />
+      <Header />
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <div className={classes.content}>
