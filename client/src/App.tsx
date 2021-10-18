@@ -8,7 +8,7 @@ import Investments from "./components/InvestmentTable";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { theme } from "./themes/theme";
+import { theme } from "./styles/theme";
 import API from "./api";
 
 interface PortfolioRecord {

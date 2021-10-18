@@ -7,7 +7,7 @@ export const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: 'PT Sans, sans-serif',
+    fontFamily: 'Lato, sans-serif',
     h5: {
       fontSize: '1.3rem',
       fontWeight: 700
