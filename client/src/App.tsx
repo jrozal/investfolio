@@ -20,6 +20,9 @@ interface PortfolioRecord {
 
 const useStyles = makeStyles({
   root: {
+    '& .MuiPaper-rounded': {
+      borderRadius: '8px'
+    },
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
