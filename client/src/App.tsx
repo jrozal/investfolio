@@ -23,6 +23,9 @@ const useStyles = makeStyles({
     '& .MuiPaper-rounded': {
       borderRadius: '8px'
     },
+    '& .MuiPaper-elevation1': {
+      boxShadow: `0px 2px 4px -1px rgb(0 0 0 / 11%)`
+    },
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
