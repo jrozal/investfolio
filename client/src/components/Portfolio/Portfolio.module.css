@@ -1,0 +1,14 @@
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  box-shadow: none;
+}
+
+.button {
+  padding: 16px;
+}
+
+.tableRow {
+  cursor: pointer;
+}
