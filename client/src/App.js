@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Portfolio from './components/Portfolio';
+import API from './api'
+import { StyledEngineProvider } from '@mui/material/styles';
 
-function App() {
+const App = () => {
+  const [portfolioData, setPortfolioData] = useState([]);
+
+  const getPortfolioData = async () => {
+    try {
+      const response = await API.get('/portfolio-data');
+      setPortfolioData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getPortfolioData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // StyledEngineProvider allows CSS-in-JS to be used
+    <StyledEngineProvider injectFirst>
+      <div className="App">
+        <Portfolio data={portfolioData}/>
+      </div>
+    </StyledEngineProvider>
   );
 }
 
