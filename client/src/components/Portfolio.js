@@ -34,13 +34,24 @@ const TableBodyCell = styled(TableCell)`
 const Portfolio = ({ data }) => {
   const headings = ['Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
 
-  const renderPrice = (number) => {
+  const renderPriceWithCommas = (price) => {
+    return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const renderPriceChange = (number) => {
     if (number < 0) {
       number = `-$${number.slice(1)}`;
       return <span style={{ color: '#e01616' }}>{number}</span>;
     }
     return <span style={{ color: '#0d6f3f' }}>${number}</span>;
   };
+
+  const renderPercentage = (number) => {
+    if (number < 0) {
+      return <span style={{ color: '#e01616' }}>{number}%</span>;
+    }
+    return <span style={{ color: '#0d6f3f' }}>{number}%</span>;
+  }
 
   return (
     <Grid item lg={12} md={12} xl={12} xs={12}>
@@ -90,10 +101,18 @@ const Portfolio = ({ data }) => {
                       <Box sx={{ fontWeight: 700 }}>{record.symbol}</Box>
                       <Box sx={{ color: "#4c4c4c" }}>{record.description}</Box>
                     </TableBodyCellSymbol>
-                    <TableBodyCell>{record.price}</TableBodyCell>
-                    <TableBodyCell>{renderPrice(record.priceChange)}</TableBodyCell>
-                    <TableBodyCell>{record.percentChange}%</TableBodyCell>
-                    <TableBodyCell>{renderPrice(record.profitLossAmount)}</TableBodyCell>
+                    <TableBodyCell>
+                      {renderPriceWithCommas(record.price)}
+                    </TableBodyCell>
+                    <TableBodyCell>
+                      {renderPriceChange(record.priceChange)}
+                    </TableBodyCell>
+                    <TableBodyCell>
+                      {renderPercentage(record.percentChange)}
+                    </TableBodyCell>
+                    <TableBodyCell>
+                      {renderPriceChange(record.profitLossAmount)}
+                    </TableBodyCell>
                     <TableBodyCell>{record.quantity}</TableBodyCell>
                   </TableRow>
                 ))}
