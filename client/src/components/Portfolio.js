@@ -22,7 +22,12 @@ const Portfolio = ({ data }) => {
 
   return (
     <Grid item lg={12} md={12} xl={12} xs={12}>
-      <Card>
+      <Card
+        sx={{
+          borderRadius: "12px",
+          boxShadow: "0 0 8px rgba(0,0,0,0.11)",
+        }}
+      >
         <Card
           sx={{
             display: "flex",
@@ -59,6 +64,7 @@ const Portfolio = ({ data }) => {
               <TableBody>
                 {data.map((record, i) => (
                   <TableRow
+                    key={i}
                     sx={{
                       cursor: "pointer",
                       ":hover": {
