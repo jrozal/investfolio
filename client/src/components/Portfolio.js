@@ -11,6 +11,7 @@ import {
   TableRow,
 } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import { styled } from '@mui/material/styles';
 
 const TableHeaderCell = styled(TableCell)`
