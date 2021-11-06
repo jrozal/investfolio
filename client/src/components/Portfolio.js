@@ -70,8 +70,11 @@ const Portfolio = ({ data }) => {
             boxShadow: "none",
           }}
         >
-          <CardHeader title="Portfolio" />
-          <Button sx={{ padding: "16px" }}>Add Investment</Button>
+          <CardHeader
+            title="Portfolio"
+            sx={{ padding: "0px" }}
+          />
+          <Button sx={{ padding: "0px" }}>Add Investment</Button>
         </Card>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 800 }}>
