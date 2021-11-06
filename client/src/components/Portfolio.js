@@ -13,18 +13,41 @@ import {
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { styled } from '@mui/material/styles';
 
-const TableBodyCell = styled(TableCell)`
+const TableHeaderCell = styled(TableCell)`
   padding: 10px;
+  color: #CBCBCD;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-top: 1px solid #e0e0e0;
+  background-color: #FEFDFF;
+`;
+
+const TableBodyCellSymbol = styled(TableCell)`
+  padding: 5px;
+`;
+
+const TableBodyCell = styled(TableCell)`
+  padding: 5px;
+  text-align: right;
 `;
 
 const Portfolio = ({ data }) => {
-  const headings = ['Symbol', 'Description', 'Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
+  const headings = ['Price', 'Today\'s Price Change', 'Today\'s % Change', 'Today\'s Gain/Loss', 'Shares'];
+
+  const renderPrice = (number) => {
+    if (number < 0) {
+      number = `-$${number.slice(1)}`;
+      return <span style={{ color: '#e01616' }}>{number}</span>;
+    }
+    return <span style={{ color: '#0d6f3f' }}>${number}</span>;
+  };
 
   return (
     <Grid item lg={12} md={12} xl={12} xs={12}>
       <Card
         sx={{
           borderRadius: "12px",
+          padding: "5px 20px 20px 20px",
           boxShadow: "0 0 8px rgba(0,0,0,0.11)",
         }}
       >
@@ -44,20 +67,11 @@ const Portfolio = ({ data }) => {
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableHeaderCell>Symbol</TableHeaderCell>
                   {headings.map((heading, i) => (
-                    <TableCell
-                      key={i}
-                      sx={{
-                        padding: "10px",
-                        color: "#CBCBCD",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        borderTop: "1px solid #e0e0e0",
-                        backgroundColor: "#FEFDFF",
-                      }}
-                    >
+                    <TableHeaderCell key={i} sx={{ textAlign: "right" }}>
                       {heading}
-                    </TableCell>
+                    </TableHeaderCell>
                   ))}
                 </TableRow>
               </TableHead>
@@ -72,12 +86,14 @@ const Portfolio = ({ data }) => {
                       },
                     }}
                   >
-                    <TableBodyCell>{record.symbol}</TableBodyCell>
-                    <TableBodyCell>{record.description}</TableBodyCell>
+                    <TableBodyCellSymbol>
+                      <Box sx={{ fontWeight: 700 }}>{record.symbol}</Box>
+                      <Box sx={{ color: "#4c4c4c" }}>{record.description}</Box>
+                    </TableBodyCellSymbol>
                     <TableBodyCell>{record.price}</TableBodyCell>
-                    <TableBodyCell>{record.priceChange}</TableBodyCell>
-                    <TableBodyCell>{record.percentChange}</TableBodyCell>
-                    <TableBodyCell>{record.profitLossAmount}</TableBodyCell>
+                    <TableBodyCell>{renderPrice(record.priceChange)}</TableBodyCell>
+                    <TableBodyCell>{record.percentChange}%</TableBodyCell>
+                    <TableBodyCell>{renderPrice(record.profitLossAmount)}</TableBodyCell>
                     <TableBodyCell>{record.quantity}</TableBodyCell>
                   </TableRow>
                 ))}
