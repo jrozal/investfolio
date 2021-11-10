@@ -65,7 +65,7 @@ const calculatePortfolioData = async (apiDataRecord, queryDataRecord) => {
 
   await queryDataRecord.forEach((queryData, i) => {
     let apiData = apiDataRecord[i];
-    let marketValue = (queryData.shares * apiData.data.c).toFixed(2);
+    let marketValue = (queryData.shares * (apiData.data.c || apiData.data.last)).toFixed(2);
     let calculatedAllocation = (parseFloat(marketValue) / parseFloat(portfolioValue)).toFixed(2);
     newData[i]['portfolioAllocation'] = calculatedAllocation;
 
