@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Box, Container, Grid, CssBaseline } from "@mui/material";
+import AssetAllocation from './components/AssetAllocation';
 import Header from './components/Header'
 import Portfolio from './components/Portfolio';
 import API from './api'
@@ -8,11 +9,13 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 
 const App = () => {
   const [portfolioData, setPortfolioData] = useState([]);
+  const [assetAllocationData, setAssetAllocationData] = useState([]);
 
   const getPortfolioData = async () => {
     try {
       const response = await API.get('/portfolio-data');
       setPortfolioData(response.data.data);
+      setAssetAllocationData(response.data.portfolioAllocation);
     } catch (error) {
       console.error(error);
     }
@@ -55,6 +58,9 @@ const App = () => {
               <Box>
                 <Container>
                   <Grid container spacing={3}>
+                    <AssetAllocation
+                      assetAllocationData={assetAllocationData}
+                    />
                     <Portfolio data={portfolioData} />
                   </Grid>
                 </Container>
