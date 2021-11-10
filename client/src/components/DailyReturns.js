@@ -70,6 +70,7 @@ const DailyReturns = ({ dailyReturnsData }) => {
             family: "Lato, sans-serif",
             size: 13,
           },
+          color: "#4c4c4c"
         },
         grid: {
           color: "",
@@ -81,6 +82,7 @@ const DailyReturns = ({ dailyReturnsData }) => {
             family: "Lato, sans-serif",
             size: 13,
           },
+          color: "#4c4c4c"
         },
       },
     },
