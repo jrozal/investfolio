@@ -81,7 +81,7 @@ const AssetAllocation = ({ assetAllocationData }) => {
           padding: 15,
           font: {
             family: "Lato, sans-serif",
-            size: "13px",
+            size: 13,
           },
         },
         title: {
