@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Container, Grid, CssBaseline } from "@mui/material";
 import AssetAllocation from './components/AssetAllocation';
+import DailyReturns from './components/DailyReturns';
 import Header from './components/Header'
 import Portfolio from './components/Portfolio';
 import API from './api'
@@ -61,6 +62,7 @@ const App = () => {
                     <AssetAllocation
                       assetAllocationData={assetAllocationData}
                     />
+                    <DailyReturns dailyReturnsData={portfolioData} />
                     <Portfolio data={portfolioData} />
                   </Grid>
                 </Container>
