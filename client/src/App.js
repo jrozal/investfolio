@@ -58,7 +58,7 @@ const App = () => {
               justifyContent: "center",
               flex: "1 1 auto",
               overflow: "hidden",
-              paddingTop: "64px",
+              paddingTop: "48px",
             }}
           >
             <Box
