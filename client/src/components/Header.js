@@ -17,9 +17,14 @@ const Header = () => (
       <Typography
         sx={{
           fontFamily: "'Pacifico', cursive",
-          fontSize: "1.7rem",
+          fontSize: "2rem",
           margin: "auto",
-          color: "#00BE70",
+          color: "#313BF3",
+          background: 'linear-gradient(90deg, rgba(49,59,243,1) 35%, rgba(130,137,255,1) 100%)',
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          MozBackgroundClip: "text",
+          MozTextFillColor: "transparent",
         }}
       >
         <span>investfolio</span>
