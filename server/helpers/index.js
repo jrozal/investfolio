@@ -4,7 +4,8 @@ const parseIndexData = (data) => {
     return {
       symbol: record.symbol,
       today: record.c || record.last,
-      change: record.dp || (((record.last - record.open) / record.open) * 100),
+      percentChange: record.dp || (((record.last - record.open) / record.open) * 100),
+      priceChange: record.d || record.last - record.open,
       chartData: record.chartData
     }
   });
