@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const InvestmentSummaryBox = styled(Box)`
@@ -60,7 +60,7 @@ const Header = () => {
           width: "100%",
         }}
       >
-        <Typography
+        <Box
           sx={{
             fontFamily: "'Pacifico', cursive",
             fontSize: "2rem",
@@ -74,7 +74,7 @@ const Header = () => {
           }}
         >
           <Title>investfolio</Title>
-        </Typography>
+        </Box>
         <InvestmentSummaryBox>
           <InvestmentItemBox>
             <InvestmentItemLabel>Total Assets:</InvestmentItemLabel>
