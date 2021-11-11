@@ -4,6 +4,7 @@ import AssetAllocation from './components/AssetAllocation';
 import DailyReturns from './components/DailyReturns';
 import Header from './components/Header'
 import Portfolio from './components/Portfolio';
+import TodaysMarkets from './components/TodaysMarkets';
 import API from './api'
 import { theme } from './global/theme';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
@@ -11,6 +12,7 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 const App = () => {
   const [portfolioData, setPortfolioData] = useState([]);
   const [assetAllocationData, setAssetAllocationData] = useState([]);
+  const [marketData, setMarketData] = useState([]);
 
   const getPortfolioData = async () => {
     try {
@@ -22,8 +24,18 @@ const App = () => {
     }
   };
 
+  const getMarketData = async () => {
+    try {
+      const response = await API.get('/market-data');
+      setMarketData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getPortfolioData();
+    getMarketData();
   }, []);
 
   return (
@@ -59,6 +71,7 @@ const App = () => {
               <Box>
                 <Container>
                   <Grid container spacing={3}>
+                    <TodaysMarkets marketData={marketData} />
                     <AssetAllocation
                       assetAllocationData={assetAllocationData}
                     />
