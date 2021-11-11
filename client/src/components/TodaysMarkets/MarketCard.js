@@ -7,6 +7,8 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { theme } from "../../global/theme";
 import Chart from "./Chart";
 import { styled } from "@mui/material/styles";
@@ -18,19 +20,37 @@ const ChartCardContent = styled(CardContent)`
 `;
 
 const PercentChangeTypography = styled(Typography)`
-  color: ${(props) => (props.change > 0 ? "#0d6f3f" : "#e01616")};
+  color: ${(props) => (props.percentchange > 0 ? "#0d6f3f" : "#e01616")};
 `;
 
 const MarketCard = ({ heading, marketData }) => {
-  const { symbol, today, change } = marketData;
+  const { symbol, today, percentChange, priceChange } = marketData;
   const renderPriceWithCommas = (price) => {
     return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const renderArrowIcon = (price) => {
+    return price > 0 ? (
+      <ArrowDropUpIcon sx={{ fontSize: 40, marginLeft: "-15px" }} />
+    ) : (
+      <ArrowDropDownIcon sx={{ fontSize: 40, marginLeft: "-15px" }} />
+    );
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Card variant="rounded-soft">
-        <CardHeader title={heading} sx={{ height: "3rem", padding: "0px" }} />
+        <Box sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <CardHeader title={heading} sx={{ height: "3rem", padding: "0px" }} />
+          <Typography sx={{ color: "#CBCBCD", fontSize: "13px" }}>
+            Last 24h
+          </Typography>
+        </Box>
         <Box sx={{ color: "#4c4c4c", size: "1.15rem", marginTop: "-0.75rem" }}>
           {symbol}
         </Box>
@@ -50,26 +70,36 @@ const MarketCard = ({ heading, marketData }) => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems: "center",
                 }}
               >
+                <Box sx={{ height: "20px", width: "20px" }}>
+                  {renderArrowIcon(today)}
+                </Box>
                 <Typography
-                  sx={{ marginRight: 1, fontSize: "1.15rem", fontWeight: 700 }}
+                  sx={{ marginRight: 1, fontSize: "1.5rem" }}
                 >
                   {renderPriceWithCommas(today)}
                 </Typography>
-                <PercentChangeTypography
-                  change={change}
-                  sx={{ marginRight: 1, fontSize: "1.15rem", fontWeight: 700 }}
-                >
-                  {change > 0 && "+"}
-                  {change.toFixed(2)}%
-                </PercentChangeTypography>
               </Box>
-              <Box>
-                <Typography sx={{ color: "#4c4c4c", fontSize: "13px" }}>
-                  Last 24h
-                </Typography>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "end",
+              }}>
+                <PercentChangeTypography
+                  percentchange={priceChange}
+                  sx={{ marginRight: 1, fontSize: "0.85rem"}}
+                >
+                  {priceChange > 0 && "+"}
+                  {renderPriceWithCommas(priceChange.toFixed(2))}
+                </PercentChangeTypography>
+                <PercentChangeTypography
+                  percentchange={percentChange}
+                  sx={{ marginRight: 1, fontSize: "1rem", fontWeight: 700 }}
+                >
+                  {percentChange > 0 && "+"}
+                  {percentChange.toFixed(2)}%
+                </PercentChangeTypography>
               </Box>
             </Box>
           </Grid>
