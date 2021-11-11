@@ -4,7 +4,10 @@ const { finnhubApiKey } = config;
 const { parseIndexData } = require('../helpers');
 const finnhubURL = 'https://finnhub.io/api/v1';
 
-function getMarketIndexData() {
+async function getMarketIndexData() {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const yesterday = currentTime - 86400; // 24 hrs ago (in seconds);
+
   const symbols = ['SPY', 'QQQ', 'IWM', 'BTC/USD'];
 
   const urls = symbols.map((symbol) => {
@@ -15,11 +18,34 @@ function getMarketIndexData() {
     }
   });
 
+  const chartUrls = symbols.map((symbol) => {
+    if (symbol !== 'BTC/USD') {
+      return (
+        axios.get(`${finnhubURL}/stock/candle?symbol=${symbol}&resolution=60&from=${yesterday}&to=${currentTime}&token=${finnhubApiKey}`)
+      );
+    } else {
+      return (axios.get(`${finnhubURL}/crypto/candle?symbol=BINANCE:BTCUSDT&resolution=60&from=${yesterday}&to=${currentTime}&token=${finnhubApiKey}`))
+    }
+  });
+
+
+  const chartUrlResponse = await Promise.all(chartUrls);
+
+  const chartData = [];
+
+  symbols.forEach((symbol, i) => {
+    chartData.push({
+      symbol: symbol,
+      data: chartUrlResponse[i].data
+    });
+  });
+
   return Promise.all(urls)
     .then(results => {
       return results.map((res, i) => {
         return {
           symbol: symbols[i],
+          chartData: chartData[i].data,
           ...res.data
         }
       });

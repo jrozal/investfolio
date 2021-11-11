@@ -2,7 +2,7 @@ const router = require('express').Router();
 const controller = require('../controllers');
 const { cache } = require('../services/cache');
 
-router.get('/index-data', cache, controller.getMarketIndexData);
+router.get('/market-data', cache, controller.getMarketIndexData);
 
 router.get('/portfolio-data', cache, controller.getPortfolioData);
 
