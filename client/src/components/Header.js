@@ -40,7 +40,11 @@ const Title = styled(Box)`
   }
 `;
 
-const Header = () => {
+const Header = ({ portfolioValue, todaysChange }) => {
+  const renderPriceWithCommas = (price) => {
+    return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <AppBar
       sx={{
@@ -78,11 +82,13 @@ const Header = () => {
         <InvestmentSummaryBox>
           <InvestmentItemBox>
             <InvestmentItemLabel>Total Assets:</InvestmentItemLabel>
-            <Box sx={{ color: "#313BF3", fontWeight: 700 }}>$100,000</Box>
+            <Box sx={{ color: "#313BF3", fontWeight: 700 }}>
+              {renderPriceWithCommas(portfolioValue.toFixed(2))}
+            </Box>
           </InvestmentItemBox>
           <InvestmentItemBox>
             <InvestmentItemLabel>Today's Change:</InvestmentItemLabel>
-            <Box sx={{ color: "#529FE1", fontWeight: 700 }}>1,000%</Box>
+            <Box sx={{ color: "#529FE1", fontWeight: 700 }}>{todaysChange.toFixed(2)}%</Box>
           </InvestmentItemBox>
         </InvestmentSummaryBox>
       </Toolbar>

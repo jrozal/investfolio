@@ -13,11 +13,15 @@ const App = () => {
   const [portfolioData, setPortfolioData] = useState([]);
   const [assetAllocationData, setAssetAllocationData] = useState([]);
   const [marketData, setMarketData] = useState([]);
+  const [portfolioValue, setPortfolioValue] = useState(0);
+  const [todaysChange, setTodaysChange] = useState(0);
 
   const getPortfolioData = async () => {
     try {
       const response = await API.get('/portfolio-data');
-      setPortfolioData(response.data.data);
+      setPortfolioValue(response.data.portfolioValue);
+      setTodaysChange(response.data.todaysChange);
+      setPortfolioData(response.data.portfolioData);
       setAssetAllocationData(response.data.portfolioAllocation);
     } catch (error) {
       console.error(error);
@@ -43,7 +47,7 @@ const App = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
+        <Header portfolioValue={portfolioValue} todaysChange={todaysChange} />
         <Box
           sx={{
             display: "flex",
