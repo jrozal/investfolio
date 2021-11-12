@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { theme } from '../global/theme';
 import { Doughnut } from 'react-chartjs-2';
+import gradients from "../global/gradients";
 
 const AssetAllocation = ({ assetAllocationData }) => {
   const chartLabels = assetAllocationData.map(data => data.symbol);
@@ -17,43 +18,14 @@ const AssetAllocation = ({ assetAllocationData }) => {
 
   const data = (canvas) => {
     const ctx = canvas.getContext("2d");
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(60, 155, 252, 0.2)");
-    gradient.addColorStop(1, "rgba(91, 127, 253, 1)");
-
-    const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient2.addColorStop(0, "rgba(255, 169, 117, 0)");
-    gradient2.addColorStop(1, "rgba(255, 91, 117, 1)");
-
-    const gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient3.addColorStop(1, "rgba(226, 41, 240, 1)");
-    gradient3.addColorStop(0, "rgba(154, 45, 247, 0)");
+    const colors = gradients(ctx);
 
     return {
       labels: chartLabels,
       datasets: [
         {
           data: dataSet,
-          backgroundColor: [
-            '#EFF7F6',
-            '#B0E0DD',
-            '#9CB2BB',
-            '#18A657',
-            '#66BD9E',
-            '#414D58',
-            gradient3,
-            "#A8ABD2",
-            "#F5F6FA",
-            gradient2,
-            gradient,
-            '#364CC9',
-            "#313BF3",
-            "#555158",
-            "#A228DF",
-            "#82A53F",
-            "#529FE1",
-            "#E2234B",
-          ],
+          backgroundColor: colors,
           hoverOffset: 4,
         },
       ],
