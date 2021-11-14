@@ -18,12 +18,12 @@ const DailyReturns = ({ dailyReturnsData }) => {
     const ctx = canvas.getContext("2d");
 
     const greenGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    greenGradient.addColorStop(0, "rgba(116, 214, 128, 0.8)");
-    greenGradient.addColorStop(1, "rgba(55, 139, 41, 1)");
+    greenGradient.addColorStop(0, "rgba(152, 222, 91, 1)");
+    greenGradient.addColorStop(1, "rgba(8, 225, 174, 1)");
 
     const redGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    redGradient.addColorStop(0, "rgba(255, 0, 0, 0.8)");
-    redGradient.addColorStop(1, "rgba(153, 0, 0, 1)");
+    redGradient.addColorStop(0, "rgba(130, 114, 114, 1)");
+    redGradient.addColorStop(1, "rgba(216, 196, 173, 1)");
 
   const colors = dataSet.map((value) =>
     value < 0 ? redGradient : greenGradient
