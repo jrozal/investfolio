@@ -26,6 +26,9 @@ const PercentChangeTypography = styled(Typography)`
 const MarketCard = ({ heading, marketData }) => {
   const { symbol, today, percentChange, priceChange } = marketData;
   const renderPriceWithCommas = (price) => {
+    if (typeof price === "number") {
+      price = price.toFixed(2);
+    }
     return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
