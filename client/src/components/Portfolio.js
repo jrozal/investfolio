@@ -13,6 +13,7 @@ import {
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { styled } from '@mui/material/styles';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const TableHeaderCell = styled(TableCell)`
   padding: 10px;
@@ -75,7 +76,9 @@ const Portfolio = ({ data }) => {
             title="Portfolio"
             sx={{ padding: "0px" }}
           />
-          <Button sx={{ padding: "0px" }}>Add Investment</Button>
+          <Button sx={{ padding: "0px", color: "#CBCBCD" }}>
+            <MoreHorizIcon />
+          </Button>
         </Card>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 800 }}>
