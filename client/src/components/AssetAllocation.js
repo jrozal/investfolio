@@ -8,18 +8,19 @@ import {
 } from "@mui/material";
 import { theme } from '../global/theme';
 import { Doughnut } from 'react-chartjs-2';
-import gradients from "../global/gradients";
+import chroma from "chroma-js";
 
 const AssetAllocation = ({ assetAllocationData }) => {
   const chartLabels = assetAllocationData.map(data => data.symbol);
   const dataSet = assetAllocationData.map(
     (data) => parseFloat(data.portfolioAllocation) * 100
   );
+  const colors = chroma
+    .scale(["#313bf0", "#96ffea", "#008080"])
+    .mode("lrgb")
+    .colors(dataSet.length);
 
   const data = (canvas) => {
-    const ctx = canvas.getContext("2d");
-    const colors = gradients(ctx);
-
     return {
       labels: chartLabels,
       datasets: [
