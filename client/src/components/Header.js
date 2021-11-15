@@ -60,7 +60,7 @@ const Header = ({ portfolioValue, todaysChange }) => {
           height: "5rem",
           display: "flex",
           justifyContent: "space-between",
-          maxWidth: "1152px",
+          maxWidth: "1280px",
           width: "100%",
         }}
       >
