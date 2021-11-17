@@ -32,6 +32,14 @@ const MarketCard = ({ heading, marketData }) => {
     return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const renderPriceChange = (number) => {
+    if (number < 0) {
+      number = `-$${number.slice(1)}`;
+      return <span style={{ color: '#e01616' }}>{number}</span>;
+    }
+    return <span style={{ color: '#0d6f3f' }}>${number}</span>;
+  };
+
   const renderArrowIcon = (price) => {
     return price > 0 ? (
       <ArrowDropUpIcon sx={{ fontSize: 40, marginLeft: "-15px" }} />
@@ -76,7 +84,7 @@ const MarketCard = ({ heading, marketData }) => {
                 }}
               >
                 <Box sx={{ height: "20px", width: "20px" }}>
-                  {renderArrowIcon(today)}
+                  {renderArrowIcon(priceChange)}
                 </Box>
                 <Typography
                   sx={{ marginRight: 1, fontSize: "1.5rem" }}
@@ -94,7 +102,7 @@ const MarketCard = ({ heading, marketData }) => {
                   sx={{ marginRight: 1, fontSize: "0.85rem"}}
                 >
                   {priceChange > 0 && "+"}
-                  {renderPriceWithCommas(priceChange.toFixed(2))}
+                  {renderPriceChange(priceChange.toFixed(2))}
                 </PercentChangeTypography>
                 <PercentChangeTypography
                   percentchange={percentChange}
