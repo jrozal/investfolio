@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db-init": "node database/setup.js",
     "db-seed": "node database/populate.js",
     "start-dev": "nodemon index.js",
     "start": "node index.js"
