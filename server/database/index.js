@@ -4,7 +4,12 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: dialect
+  dialect: dialect,
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false,
+    }
+  }
 });
 
 const dbConnection = async () => {
