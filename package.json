@@ -1,0 +1,24 @@
+{
+  "name": "investfolio-app",
+  "version": "1.0.0",
+  "description": "Investment portfolio dashboard and stock / crypto tracking application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "build": "cd client/ && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrozal/investfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrozal/investfolio/issues"
+  },
+  "homepage": "https://github.com/jrozal/investfolio#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
