@@ -29,8 +29,18 @@ const App = () => {
   };
 
   const getMarketData = async () => {
+    const date = new Date();
+    const day = date.getDay();
+    const currentTime = Math.floor(Date.now() / 1000);
+
     try {
-      const response = await API.get('/market-data');
+      const response = await API.get('/market-data', {
+        params: {
+          day: day,
+          currentTime: currentTime
+        }
+      });
+      console.log(response.data);
       setMarketData(response.data);
     } catch (error) {
       console.error(error);
